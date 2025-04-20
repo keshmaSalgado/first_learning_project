@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+
+body {
+    background-color: #0e0e0e;
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+
+}
+
+.color-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid white;
+    transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
+  }
+
+  .circle:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+  
