@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, OrbitControls, MeshReflectorMaterial, Stage } from "@react-three/drei";
+import { Environment, OrbitControls, MeshReflectorMaterial, Stage, Html } from "@react-three/drei";
 import About from "./about";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Configurator from "./configarator";
 import Contact from "./contact";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -19,16 +19,19 @@ function CarPage() {
     const { carmodel, name, position, about, seatcolor, rimcolorokay } = location.state || {};
 
 
-    
+
     // Handle window resize for responsive design
     useEffect(() => {
+
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768);
         };
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
+
     }, []);
+
 
     const renderCarModel = () => {
         switch (carmodel) {
@@ -82,9 +85,14 @@ function CarPage() {
             <Canvas className="w-full h-full">
                 <ambientLight intensity={0.004} />
                 <directionalLight position={[5, 5, 5]} intensity={0.02} />
-                <Stage environment="city" intensity={0.05} castShadow={false}>
-                    {renderCarModel()}
-                </Stage>
+                <Suspense fallback={
+                    <Html center>
+                        <p className="text-white text-xl italic animate-pulse">Loading car model...</p>
+                    </Html>
+                }>
+                    <Stage environment="city" intensity={0.05} castShadow={false}>
+                        {renderCarModel()}
+                    </Stage></Suspense>
                 <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={position}>
                     {isMobile ? <planeGeometry args={[50, 50]} /> : <planeGeometry args={[1000, 1000]} />}
                     <MeshReflectorMaterial

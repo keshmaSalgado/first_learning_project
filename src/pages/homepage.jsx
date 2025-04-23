@@ -9,6 +9,7 @@ import { isMobile } from "react-device-detect";
 function CameraLogger() {
     const { camera } = useThree();
 
+
     useEffect(() => {
         console.log("Camera Position:", camera.position);
         camera.position.set(293.7973660512041, 137.9060641050322, -287.4210371754323);
@@ -19,6 +20,10 @@ function CameraLogger() {
 }
 
 function Homepage() {
+    
+    useEffect(() => {
+      isMobile && alert('Use Desktop for better experience')
+    }, []);
 
     return (
         <div className="relative w-full h-screen">
@@ -40,7 +45,7 @@ function Homepage() {
                 <Stage environment="city" intensity={0.05} castShadow={false}>
                     <Model />
                 </Stage>
-                <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-70}>
+                <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-12}>
                     {isMobile ? <planeGeometry args={[100, 100]} /> : <planeGeometry args={[1000, 1000]} />}
                     <MeshReflectorMaterial
                         blur={[300, 100]}
