@@ -1,7 +1,7 @@
 import { Canvas, useThree } from "@react-three/fiber";
 import { Model } from "./lamb2016model";
-import { Environment, OrbitControls, MeshReflectorMaterial, Stage } from "@react-three/drei";
-import { useEffect } from "react";
+import { Environment, OrbitControls, MeshReflectorMaterial, Stage, Html } from "@react-three/drei";
+import { Suspense, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
@@ -42,9 +42,14 @@ function Homepage() {
             <Canvas>
                 <ambientLight intensity={0.004} />
                 <directionalLight position={[5, 5, 5]} intensity={0.02} />
+                  <Suspense fallback={
+                                    <Html center>
+                                        <p className="text-white text-xl italic animate-pulse">Loading car model...</p>
+                                    </Html>
+                                }>
                 <Stage environment="city" intensity={0.05} castShadow={false}>
                     <Model />
-                </Stage>
+                </Stage></Suspense>
                 <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-12}>
                     {isMobile ? <planeGeometry args={[100, 100]} /> : <planeGeometry args={[1000, 1000]} />}
                     <MeshReflectorMaterial
