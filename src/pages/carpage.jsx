@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Environment, OrbitControls, MeshReflectorMaterial, Stage } from "@react-three/drei";
 import About from "./about";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Configurator from "./configarator";
 import Contact from "./contact";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -10,12 +10,25 @@ import { Model } from "../models/lamboghiniHarucan";
 import { PeganiHaurya } from "../models/peganihaurya";
 
 
+
 function CarPage() {
     const location = useLocation();
     const navigate = useNavigate();
     const [activePage, setActivePage] = useState("configurator");
-
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const { carmodel, name, position, about, seatcolor, rimcolorokay } = location.state || {};
+
+
+    
+    // Handle window resize for responsive design
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const renderCarModel = () => {
         switch (carmodel) {
@@ -73,7 +86,7 @@ function CarPage() {
                     {renderCarModel()}
                 </Stage>
                 <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={position}>
-                    <planeGeometry args={[4000, 4000]} />
+                    {isMobile ? <planeGeometry args={[50, 50]} /> : <planeGeometry args={[1000, 1000]} />}
                     <MeshReflectorMaterial
                         blur={[300, 100]}
                         resolution={3000}

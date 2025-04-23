@@ -3,6 +3,7 @@ import { Model } from "./lamb2016model";
 import { Environment, OrbitControls, MeshReflectorMaterial, Stage } from "@react-three/drei";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 
 function CameraLogger() {
@@ -40,7 +41,7 @@ function Homepage() {
                     <Model />
                 </Stage>
                 <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-70}>
-                    <planeGeometry args={[4000, 4000]} />
+                    {isMobile ? <planeGeometry args={[100, 100]} /> : <planeGeometry args={[1000, 1000]} />}
                     <MeshReflectorMaterial
                         blur={[300, 100]}
                         resolution={3000}
