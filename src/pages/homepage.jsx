@@ -20,9 +20,9 @@ function CameraLogger() {
 }
 
 function Homepage() {
-    
+
     useEffect(() => {
-      isMobile && alert('Use Desktop for better experience')
+        isMobile && alert('Use Desktop for better experience')
     }, []);
 
     return (
@@ -42,14 +42,14 @@ function Homepage() {
             <Canvas>
                 <ambientLight intensity={0.004} />
                 <directionalLight position={[5, 5, 5]} intensity={0.02} />
-                  <Suspense fallback={
-                                    <Html center>
-                                        <p className="text-white text-xl italic animate-pulse">Loading car model...</p>
-                                    </Html>
-                                }>
-                <Stage environment="city" intensity={0.05} castShadow={false}>
-                    <Model />
-                </Stage></Suspense>
+                <Suspense fallback={
+                    <Html center>
+                        <p className="text-white text-xl italic animate-pulse">Loading car model...</p>
+                    </Html>
+                }>
+                    <Stage environment="city" intensity={0.05} castShadow={false}>
+                        <Model />
+                    </Stage></Suspense>
                 <mesh rotation={[-Math.PI / 2, 0, 0]} position-y={-12}>
                     {isMobile ? <planeGeometry args={[100, 100]} /> : <planeGeometry args={[1000, 1000]} />}
                     <MeshReflectorMaterial
