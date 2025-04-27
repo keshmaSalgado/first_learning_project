@@ -1,7 +1,7 @@
 function Contact() {
 
     return (
-        <div className="p-3 flex-col">
+        <div className="p-3 flex-col bg-blue-800 rounded-2xl m-3">
             <h1 className="font-bold text-2xl p-1">Contact</h1>
             <p>Name:</p>
             <input className="border-2" type="text" />

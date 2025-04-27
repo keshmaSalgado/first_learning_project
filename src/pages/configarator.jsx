@@ -44,7 +44,7 @@ function Configurator({ seatcolor, rimcolorokay }) {
 
             {rimcolorokay && (
                 <>
-                    <h2 className="font-bold text-[15px] p-1">Rim Color</h2>
+                    <h2 className="font-bold text-[15px] p-1">Brake Color</h2>
                     <div className="color-options">
                         {snap.rimcolors.map((rimcolor) => (
                             <div
